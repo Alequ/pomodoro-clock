@@ -3,46 +3,49 @@ const timeDisplay = document.querySelector(".timer")
 let value = document.querySelectorAll(".value");
 let control = document.querySelectorAll(".control")
 
-function timer(seconds){
-  //clear any existing timers
+function timer(seconds) {
   clearInterval(countdown);
-  const now = Date.now();
+  const now = Date.now(); // get the current date in miliseconds
   const then = now + seconds * 1000;
   displayTimeLeft(seconds);
-  countdown = setInterval(() => {
-    const secondsLeft = Math.round((then - Date.now())/ 1000)
-    if(secondsLeft < 0){
-      clearInterval(countdown);
-      return
 
+
+  countdown = setInterval(() => {
+    const secondsLeft = Math.round((then - Date.now()) / 1000);
+    if(secondsLeft < 0) {
+      clearInterval(countdown);
+      return;
     }
-    displayTimeLeft(secondsLeft)
+    displayTimeLeft(secondsLeft);
+
   }, 1000)
 }
 
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
   const remainderSeconds = seconds % 60;
-  const display = `${minutes}:${remainderSeconds < 10 ? "0" : ""}${remainderSeconds}`;
-  timeDisplay.textContent = display;
+  const display = `${minutes}:${remainderSeconds <10 ? "0" : ""}${remainderSeconds}`;
   document.title = display;
+  timeDisplay.textContent = display;
 
 }
 
 function setValue(){
   if(this.textContent == "+"){
-    this.previousSibling.previousSibling.innerHTML ++;
+
+    timeDisplay.textContent = this.previousSibling.previousSibling.innerHTML ++ +":00";
   } else if( this.textContent == "-"){
-    this.nextSibling.nextSibling.innerHTML --;
+    timeDisplay.textContent = this.nextSibling.nextSibling.innerHTML --  +":00";
   }
 
 }
-function getValue() {
-  const seconds = (parseInt(this.innerHTML)) * 1000;
 
-  timer(seconds)
+function getValue() {
+  const seconds = parseInt(this.textContent) * 60
+  timer(seconds);
 }
 
 
+
 control.forEach(controle => controle.addEventListener("click", setValue));
-value.forEach(val => val.addEventListener("click", getValue));
+timeDisplay.addEventListener("click", getValue);
