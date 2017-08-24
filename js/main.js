@@ -2,6 +2,10 @@ let countdown
 const timeDisplay = document.querySelector(".timer")
 let value = document.querySelectorAll(".value");
 let control = document.querySelectorAll(".control")
+const ready = document.querySelector(".pomodoro p")
+let flag = false;
+const reset = document.querySelector(".reset")
+
 
 function timer(seconds) {
   clearInterval(countdown);
@@ -41,11 +45,38 @@ function setValue(){
 }
 
 function getValue() {
-  const seconds = parseInt(this.textContent) * 60
-  timer(seconds);
+  flag = !flag
+
+
+  const string = this.textContent.split(":")
+
+  const seconds = parseInt(string[0]) * 60 + parseInt(string[1]);
+
+  if(flag == true) {
+    timer(seconds);
+    ready.innerHTML="Stop"
+
+
+  } else {
+
+    clearInterval(countdown);
+    ready.innerHTML="Start"
+
+
+  }
+
+
 }
+
+function resetValue() {
+  clearInterval(countdown);
+  timeDisplay.innerHTML = "25:00"
+  ready.innerHTML = "start"
+}
+
 
 
 
 control.forEach(controle => controle.addEventListener("click", setValue));
 timeDisplay.addEventListener("click", getValue);
+reset.addEventListener("click", resetValue);
