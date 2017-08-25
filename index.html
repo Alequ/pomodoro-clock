@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu" rel="stylesheet">
     </head>
     <body>
       <container>
@@ -27,23 +28,22 @@
           <div class="col-md-6 description">
             Break Length:
             <br>
-            <span class="control">-</span>
-            <div class="value">5</div>
-            <span class="control">+</span>
+            <input type="range"  min="0" max="10">
+
 
 
           </div>
           <div class="col-md-6 description">
             Sesion Length:
             <br>
-            <span class="control">-</span>
-            <div class="value">25</div>
-            <span class="control">+</span>
+            <input type="range" min="0" max="60" value="25">
+
           </div>
 
         </div>
         <div class="row">
           <div class="pomodoro">
+            <img src="img/tomato.png" alt="">
             <div class="timer" >
               25:00
             </div>
@@ -52,10 +52,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 description">Animate</div>
+          <div class="col-md-6 description stopAudio">Stop Sound</div>
           <div class="col-md-6 description reset">Reset</div>
         </div>
+        <audio data-key="65" src="sounds/alarm.mp3"></audio>
       </container>
+
+
 
       <script src="js/main.js"></script>
     </body>
