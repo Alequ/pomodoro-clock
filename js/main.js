@@ -1,4 +1,4 @@
-
+// Get selectors
 let countdown
 const timeDisplay = document.querySelector(".timer")
 const stopAudio = document.querySelector(".stopAudio")
@@ -9,14 +9,12 @@ const reset = document.querySelector(".reset")
 const input = document.querySelectorAll("input")
 const audio = document.querySelector("audio")
 
-
+//create Timer function, passing seconds
 function timer(seconds) {
   clearInterval(countdown);
   const now = Date.now(); // get the current date in miliseconds
   const then = now + seconds * 1000;
   displayTimeLeft(seconds);
-
-
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     if(secondsLeft < 0) {
@@ -32,6 +30,7 @@ function timer(seconds) {
 
   }, 1000)
 }
+
 
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -71,14 +70,12 @@ function resetValue() {
 }
 
 function getValues () {
-
   timeDisplay.innerHTML = this.value + ":00"
 }
 function stopAudioEvent () {
   audio.pause();
   audio.currentTime = 0;
 }
-
 
 
 pomodoro.addEventListener("click", startValue);
